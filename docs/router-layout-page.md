@@ -1,17 +1,18 @@
-import * as path from 'path'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+- install
+
+```sh
+yarn add vue-router vite-plugin-pages vite-plugin-vue-layouts
+mkdir ./src/layouts
+mkdir ./src/pages
+```
+
+- vite.config.ts
+
+```ts
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
-    },
-  },
-
   plugins: [
     // https://vuejs.org/guide/extras/reactivity-transform.html
     vue({
@@ -30,5 +31,29 @@ export default defineConfig({
       extensions: ['vue'],
       dirs: 'src/pages',
     }),
-  ]
+  ],
 })
+```
+
+- src/App.vue
+
+```vue
+<template>
+  <router-view />
+</template>
+```
+
+- tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "types": ["vite-plugin-pages/client", "vite-plugin-vue-layouts/client"]
+  }
+}
+```
+
+- src/router/index.ts
+- src/layouts/default.vue
+- src/pages/[...all].vue
+- src/pages/index.vue
