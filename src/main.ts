@@ -1,4 +1,4 @@
-import './index.css'
+import './main.css'
 import { createApp } from 'vue'
 import { createHead } from '@vueuse/head'
 import router from '~/router'
