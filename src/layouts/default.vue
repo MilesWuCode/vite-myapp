@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Menu from '~/components/Menu.vue'
+import UserMenu from '~/components/UserMenu.vue'
 </script>
 
 <template>
@@ -17,12 +18,8 @@ import Menu from '~/components/Menu.vue'
           </label>
         </div>
         <div class="flex-1 px-2 mx-2">Navbar Title</div>
-        <div class="flex-none hidden lg:block">
-          <ul class="menu menu-horizontal">
-            <!-- Navbar menu content here -->
-            <li><a>Navbar Item 1</a></li>
-            <li><a>Navbar Item 2</a></li>
-          </ul>
+        <div class="flex-none">
+          <UserMenu />
         </div>
       </div>
       <!-- content -->
