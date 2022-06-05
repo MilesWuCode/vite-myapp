@@ -4,12 +4,12 @@ import Menu from '~/components/Menu.vue'
 
 <template>
   <div class="drawer">
-    <input id="drawer-togger" type="checkbox" class="drawer-toggle" />
+    <input id="menu-toggle" type="checkbox" class="drawer-toggle" />
     <div class="flex flex-col drawer-content">
       <!-- Navbar -->
       <div class="w-full navbar bg-base-300">
         <div class="flex-none lg:hidden">
-          <label for="drawer-togger" class="btn btn-square btn-ghost">
+          <label for="menu-toggle" class="btn btn-square btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
               class="inline-block w-6 h-6 stroke-current">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -34,7 +34,7 @@ import Menu from '~/components/Menu.vue'
       </div>
     </div>
     <div class="drawer-side">
-      <label for="drawer-togger" class="drawer-overlay"></label>
+      <label for="menu-toggle" class="drawer-overlay"></label>
       <Menu class="p-4 overflow-y-auto w-80 bg-base-100" />
     </div>
   </div>
