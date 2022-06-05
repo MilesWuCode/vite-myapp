@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import type { Menu } from '~/types'
 
 const dropdown = ref<HTMLElement>()
+
+const menu = reactive<Menu[]>([
+  { name: 'Profile', path: '/profile' },
+  { name: 'Change Password', path: '/change-password' },
+])
 
 const closeDropdown = () => {
   dropdown.value?.blur()
@@ -17,9 +23,9 @@ const closeDropdown = () => {
     </label>
     <ul ref="dropdown" tabindex="0"
       class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-      <li><a @click="closeDropdown">Profile</a></li>
-      <li><a @click="closeDropdown">Settings</a></li>
-      <li><a @click="closeDropdown">Logout</a></li>
+      <li v-for="item of menu" :key="item.name">
+        <router-link :to="item.path" @click="closeDropdown">{{ item.name }}</router-link>
+      </li>
     </ul>
   </div>
 </template>
