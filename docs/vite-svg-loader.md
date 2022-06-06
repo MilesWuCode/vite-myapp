@@ -24,6 +24,8 @@ export default defineConfig({
 }
 ```
 
+- example
+
 ```js
 import iconUrl from './my-icon.svg?url'
 // '/assets/my-icon.2d8efhg.svg'
