@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay } from "@headlessui/vue";
 import Menu from "~/components/Menu.vue";
-import UserMenu from "~/components/UserMenu.vue";
+import UserMenu from "~/components/Navbar/UserMenu.vue";
+import Login from "~/components/Navbar/Login.vue";
+import Logout from "~/components/Navbar/Logout.vue";
 
 const isOpen = ref<boolean>(false);
 </script>
@@ -91,7 +93,9 @@ const isOpen = ref<boolean>(false);
         </div>
 
         <!-- navbar-right -->
-        <div class="flex-none">
+        <div class="flex-none space-x-2">
+          <Login />
+          <Logout />
           <UserMenu />
         </div>
       </div>
