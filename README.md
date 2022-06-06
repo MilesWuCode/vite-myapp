@@ -16,3 +16,5 @@ yarn dev
 - https://github.com/johncampionjr/vite-plugin-vue-layouts
 - https://github.com/tailwindlabs/headlessui
 - https://github.com/vueuse/vueuse
+- https://github.com/logaretm/vee-validate
+- https://github.com/jpkleemans/vite-svg-loader
