@@ -29,7 +29,7 @@ const isOpen = ref<boolean>(false);
             class="relative z-10 flex flex-col w-64 h-full border-r border-gray-200 md:hidden bg-gray-50"
           >
             <!-- logo -->
-            <div class="px-6 py-4">Logo</div>
+            <div class="p-4">Logo</div>
 
             <!-- menu -->
             <div class="flex-1 overflow-y-auto">
@@ -55,7 +55,7 @@ const isOpen = ref<boolean>(false);
     <!-- left -->
     <div class="hidden w-64 bg-gray-50 md:block">
       <!-- logo -->
-      <div class="px-6 py-4">
+      <div class="p-4">
         <router-link to="/">Logo</router-link>
       </div>
 

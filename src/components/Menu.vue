@@ -4,9 +4,9 @@ import type { Menu } from "~/types";
 
 const menu = reactive<Menu[]>([
   { name: "Index", path: "/" },
-  // { name: 'Login', path: '/login' },
-  // { name: 'Register', path: '/register' },
-  // { name: 'Fogot Password', path: '/fogot-password' },
+  { name: "Login", path: "/login" },
+  { name: "Register", path: "/register" },
+  { name: "Fogot Password", path: "/forgot-password" },
   { name: "Profile", path: "/profile" },
   { name: "Change Password", path: "/change-password" },
 ]);
