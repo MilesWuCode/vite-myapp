@@ -16,6 +16,17 @@ const router = createRouter({
   //     setTimeout(() => resolve({ top: 0, behavior: 'smooth' }), 300)
   //   })
   // },
+  scrollBehavior(to, from, savedPosition) {
+    if (to && to.hash) {
+      return {
+        el: to.hash,
+      }
+    }
+
+    return savedPosition || new Promise((resolve) => {
+      setTimeout(() => resolve({ top: 0, behavior: 'smooth' }), 300)
+    })
+  },
 })
 
 // router.beforeEach(async (to, from, next) => {
