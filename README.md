@@ -18,3 +18,5 @@ yarn dev
 - https://github.com/vueuse/vueuse
 - https://github.com/logaretm/vee-validate
 - https://github.com/jpkleemans/vite-svg-loader
+- https://github.com/ashwinkshenoy/vue-simple
+- https://github.com/nhn/tui.editor

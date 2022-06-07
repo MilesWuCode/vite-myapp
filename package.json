@@ -13,6 +13,7 @@
     "@vueuse/head": "^0.7.6",
     "autoprefixer": "^10.4.7",
     "daisyui": "^2.15.2",
+    "firebase": "^9.8.2",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24",
     "vee-validate": "^4.5.11",
@@ -20,7 +21,8 @@
     "vite-plugin-vue-layouts": "^0.6.0",
     "vite-svg-loader": "^3.3.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
