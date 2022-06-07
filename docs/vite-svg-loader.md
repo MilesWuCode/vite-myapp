@@ -33,6 +33,7 @@ import iconUrl from './my-icon.svg?url'
 import iconRaw from './my-icon.svg?raw'
 // '<?xml version="1.0"?>...'
 
+import IconComponent from './my-icon.svg'
 import IconComponent from './my-icon.svg?component'
 // <IconComponent />
 ```

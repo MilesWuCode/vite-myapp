@@ -8,14 +8,16 @@ useHead({
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="w-full max-w-sm p-4 mx-auto">
+    <!-- title -->
     <h1 class="text-xl">Login</h1>
+
+    <!-- form -->
     <form>
       <div class="space-y-2">
         <div class="w-full max-w-xs form-control">
           <label class="label">
             <span class="label-text">What is your name?</span>
-            <span class="label-text-alt">Alt label</span>
           </label>
           <input
             type="text"
@@ -23,15 +25,13 @@ useHead({
             class="w-full max-w-xs input input-bordered"
           />
           <label class="label">
-            <span class="label-text-alt">Alt label</span>
-            <span class="label-text-alt">Alt label</span>
+            <span class="text-red-600 label-text-alt">Alt label</span>
           </label>
         </div>
 
         <div class="w-full max-w-xs form-control">
           <label class="label">
             <span class="label-text">What is your name?</span>
-            <span class="label-text-alt">Alt label</span>
           </label>
           <input
             type="text"
@@ -39,14 +39,13 @@ useHead({
             class="w-full max-w-xs input input-bordered"
           />
           <label class="label">
-            <span class="label-text-alt">Alt label</span>
-            <span class="label-text-alt">Alt label</span>
+            <span class="text-red-600 label-text-alt">Alt label</span>
           </label>
         </div>
 
         <div class="space-x-2">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn">Reset</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn">Reset</button>
         </div>
       </div>
     </form>
