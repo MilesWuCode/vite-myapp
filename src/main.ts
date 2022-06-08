@@ -14,6 +14,10 @@ const options: PluginOptions = {
   position: POSITION.BOTTOM_RIGHT,
 }
 
+// vee-validate
+import init from '~/plugins/vee-validate/vee-validate'
+init()
+
 // app
 import App from './App.vue'
 

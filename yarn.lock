@@ -499,6 +499,16 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.40.tgz#76ee88ae03650de8064a6cf75b8d95f9f4a16090"
   integrity sha512-UXdBxNGqTMtm7hCwh9HtncFVLrXoqA3oJW30j6XWp5BH/wu3mVeaxo7cq5benFdBw34HB3XDT2TRPI7rXZ+mDg==
 
+"@vee-validate/i18n@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@vee-validate/i18n/-/i18n-4.5.11.tgz#a47e9808ded3f12e2ff4fcb4d9b108c0c25e195e"
+  integrity sha512-RMPF+nabSD4BIpbPpqKvsuAqUY00WfV9C/M3pEBzwgt2mUlv6nu9TsA5ybuI/UhLf8whqVnaiV2BOMwft+4OgQ==
+
+"@vee-validate/rules@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@vee-validate/rules/-/rules-4.5.11.tgz#0d300459c612938aa74ae522b7670a40317e8571"
+  integrity sha512-aGwxjr/5/w8LFVObPB6UrqYt0oRlHHFw8/nxZHowY4LP62GWlAi+mAp1fb15Paav/c9rgV4iiqsNYarS1zpNQw==
+
 "@vitejs/plugin-vue@^2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-2.3.3.tgz#fbf80cc039b82ac21a1acb0f0478de8f61fbf600"
