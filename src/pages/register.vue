@@ -58,12 +58,11 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
 
       // auth/email-already-in-use
       console.log(errorCode)
+
       // Firebase: Error (auth/email-already-in-use).
       console.log(errorMessage)
 
-      if (errorCode === 'auth/email-already-in-use') {
-        actions.setErrors({ email: errorCode })
-      }
+      actions.setErrors({ email: errorCode })
     })
 }
 </script>
