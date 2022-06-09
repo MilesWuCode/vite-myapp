@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
+import { useToast } from 'vue-toastification'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { firebaseApp } from '~/plugins/firebase/firebase'
 import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from 'firebase/auth'
 const auth = getAuth(firebaseApp)
 
@@ -13,6 +15,8 @@ useHead({
   title: 'Register',
   meta: [{ name: 'description', content: 'Register' }],
 })
+
+const toast = useToast()
 
 interface FormState {
   // any error messages
@@ -48,9 +52,13 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
 
       console.log(userCredential)
 
-      sendEmailVerification(user).then(() => {
-        console.log('send')
+      updateProfile(user, {
+        displayName: values.name,
       })
+
+      sendEmailVerification(user)
+
+      toast.success('success')
     })
     .catch((error) => {
       const errorCode = error.code
@@ -77,9 +85,28 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
       <div class="space-y-2">
         <div class="w-full max-w-xs form-control">
           <label class="label">
+            <span class="label-text">Name</span>
+          </label>
+          <Field
+            label="名字"
+            name="name"
+            as="input"
+            type="name"
+            placeholder="Type here"
+            class="w-full max-w-xs input input-bordered"
+            rules="required|max:20"
+          />
+          <label class="label">
+            <ErrorMessage as="span" name="name" class="text-red-600 label-text-alt" />
+          </label>
+        </div>
+
+        <div class="w-full max-w-xs form-control">
+          <label class="label">
             <span class="label-text">Email</span>
           </label>
           <Field
+            label="Email"
             name="email"
             as="input"
             type="email"
@@ -97,6 +124,7 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
             <span class="label-text">Password</span>
           </label>
           <Field
+            label="密碼"
             name="password"
             as="input"
             type="password"
