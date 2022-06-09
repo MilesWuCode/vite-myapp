@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
-import authState from '~/plugins/auth/authState'
+import { authState } from '~/plugins/auth'
 import { useAuthStore } from '~/stores/auth'
 
 const router = createRouter({
@@ -28,6 +28,7 @@ router.beforeEach(async (to, from, next) => {
   if (from.name === undefined) {
     await authState.then(user => {
       console.log(user)
+
       if (user) {
         authStore.setUser(user as object)
       }

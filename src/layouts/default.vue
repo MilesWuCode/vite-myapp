@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay } from '@headlessui/vue'
+import { useAuthStore } from '~/stores/auth'
 import Menu from '~/components/Menu.vue'
 import UserMenu from '~/components/navbar/UserMenu.vue'
 import Login from '~/components/navbar/Login.vue'
 import Logout from '~/components/navbar/Logout.vue'
 
 const isOpen = ref<boolean>(false)
+const authStore = useAuthStore()
 </script>
 
 <template>
@@ -94,9 +96,9 @@ const isOpen = ref<boolean>(false)
 
         <!-- navbar-right -->
         <div class="flex-none space-x-2">
-          <Login />
-          <Logout />
-          <UserMenu />
+          <Login v-if="!authStore.loggedIn"/>
+          <Logout v-else />
+          <UserMenu v-if="authStore.loggedIn" />
         </div>
       </div>
 
