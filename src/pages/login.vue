@@ -5,11 +5,14 @@ import { auth } from '~/plugins/firebase/auth'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import GoogleSingin from '~/components/singin/GoogleSingin.vue'
 import FacebookSingin from '~/components/singin/FacebookSingin.vue'
+import { useAuthStore } from '~/stores/auth'
 
 useHead({
   title: 'Login',
   meta: [{ name: 'description', content: 'Login' }],
 })
+
+const authStore = useAuthStore()
 
 interface FormState {
   // any error messages
@@ -42,8 +45,10 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user
-
+      // ...
       console.log(userCredential, user)
+      // store
+      authStore.setUser(user)
     })
     .catch((error) => {
       const errorCode = error.code

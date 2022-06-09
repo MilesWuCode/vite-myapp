@@ -17,6 +17,9 @@ export const useLogout = () => {
 
   return () => {
     authStore.setUser(null)
-    router.push('/')
+
+    if (router.currentRoute.value.meta.auth === 'member') {
+      router.push('/')
+    }
   }
 }

@@ -4,8 +4,8 @@ import { signOut } from 'firebase/auth'
 import { useToast } from 'vue-toastification'
 import { useLogout } from '~/plugins/auth'
 
-const logout = useLogout()
 const toast = useToast()
+const logout = useLogout()
 
 const onClick = () => {
   signOut(auth)
