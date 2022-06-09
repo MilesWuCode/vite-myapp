@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { TransitionRoot, TransitionChild, Dialog, DialogOverlay } from "@headlessui/vue";
-import Menu from "~/components/Menu.vue";
-import UserMenu from "~/components/Navbar/UserMenu.vue";
-import Login from "~/components/Navbar/Login.vue";
-import Logout from "~/components/Navbar/Logout.vue";
+import { ref } from 'vue'
+import { TransitionRoot, TransitionChild, Dialog, DialogOverlay } from '@headlessui/vue'
+import Menu from '~/components/Menu.vue'
+import UserMenu from '~/components/navbar/UserMenu.vue'
+import Login from '~/components/navbar/Login.vue'
+import Logout from '~/components/navbar/Logout.vue'
 
-const isOpen = ref<boolean>(false);
+const isOpen = ref<boolean>(false)
 </script>
 
 <template>
