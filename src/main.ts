@@ -4,6 +4,9 @@ import { createApp } from 'vue'
 // head
 import { createHead } from '@vueuse/head'
 
+// store
+import { createPinia } from 'pinia'
+
 // router
 import router from '~/router'
 
@@ -23,6 +26,7 @@ import App from './App.vue'
 
 createApp(App)
   .use(createHead())
+  .use(createPinia())
   .use(Toast, options)
   .use(router)
   .mount('#app')

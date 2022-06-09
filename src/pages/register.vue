@@ -2,14 +2,12 @@
 import { useHead } from '@vueuse/head'
 import { useToast } from 'vue-toastification'
 import { Form, Field, ErrorMessage } from 'vee-validate'
-import { firebaseApp } from '~/plugins/firebase/firebase'
+import { auth } from '~/plugins/firebase/auth'
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
 } from 'firebase/auth'
-const auth = getAuth(firebaseApp)
 
 useHead({
   title: 'Register',
@@ -156,5 +154,5 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
 <route lang="yaml">
 meta:
   layout: default
-  auth: everyone
+  auth: guest
 </route>

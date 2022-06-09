@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 import { Form, Field, ErrorMessage } from 'vee-validate'
-import { firebaseApp } from '~/plugins/firebase/firebase'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-const auth = getAuth(firebaseApp)
+import { auth } from '~/plugins/firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import GoogleSingin from '~/components/singin/GoogleSingin.vue'
 
 useHead({
   title: 'Login',
@@ -80,6 +80,7 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
             placeholder="Type here"
             class="w-full max-w-xs input input-bordered"
             rules="required|email"
+            autocomplete="on"
           />
           <label class="label">
             <ErrorMessage as="span" name="email" class="text-red-600 label-text-alt" />
@@ -97,6 +98,7 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
             placeholder="Type here"
             class="w-full max-w-xs input input-bordered"
             rules="required|min:8"
+            autocomplete="on"
           />
           <label class="label">
             <ErrorMessage as="span" name="password" class="text-red-600 label-text-alt" />
@@ -116,11 +118,12 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
         </div>
       </div>
     </Form>
+    <GoogleSingin />
   </div>
 </template>
 
 <route lang="yaml">
 meta:
   layout: default
-  auth: everyone
+  auth: guest
 </route>
