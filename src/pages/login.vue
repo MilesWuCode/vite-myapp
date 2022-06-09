@@ -4,6 +4,7 @@ import { Form, Field, ErrorMessage } from 'vee-validate'
 import { auth } from '~/plugins/firebase/auth'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import GoogleSingin from '~/components/singin/GoogleSingin.vue'
+import FacebookSingin from '~/components/singin/FacebookSingin.vue'
 
 useHead({
   title: 'Login',
@@ -118,7 +119,9 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
         </div>
       </div>
     </Form>
+
     <GoogleSingin />
+    <FacebookSingin />
   </div>
 </template>
 

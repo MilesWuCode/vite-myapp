@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { auth } from '~/plugins/firebase/auth'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useAuthStore } from '~/stores/auth'
 
-const provider = new GoogleAuthProvider()
-provider.addScope('https://www.googleapis.com/auth/userinfo.email')
+const provider = new FacebookAuthProvider()
+provider.addScope('email')
 
 const authStore = useAuthStore()
 
@@ -13,7 +13,7 @@ const signInPopup = () => {
   signInWithPopup(auth, provider)
     .then((result: any): void => {
       // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential: any = GoogleAuthProvider.credentialFromResult(result)
+      const credential: any = FacebookAuthProvider.credentialFromResult(result)
       // The signed-in user info.
       const user = result.user
       // ...
@@ -28,7 +28,7 @@ const signInPopup = () => {
       // The email of the user's account used.
       const email = error.email
       // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error)
+      const credential = FacebookAuthProvider.credentialFromError(error)
       // ...
       console.log(errorCode, errorMessage, email, credential)
     })
@@ -36,5 +36,5 @@ const signInPopup = () => {
 </script>
 
 <template>
-  <button type="button" class="w-full btn" @click="signInPopup">Google</button>
+  <button type="button" class="w-full btn" @click="signInPopup">Facebook</button>
 </template>
