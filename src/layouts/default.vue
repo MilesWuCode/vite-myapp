@@ -6,6 +6,7 @@ import Menu from '~/components/Menu.vue'
 import UserMenu from '~/components/navbar/UserMenu.vue'
 import Login from '~/components/navbar/Login.vue'
 import Logout from '~/components/navbar/Logout.vue'
+import Register from '~/components/navbar/Register.vue'
 
 const isOpen = ref<boolean>(false)
 const authStore = useAuthStore()
@@ -95,10 +96,14 @@ const authStore = useAuthStore()
         </div>
 
         <!-- navbar-right -->
-        <div class="flex-none space-x-2">
-          <Login v-if="!authStore.loggedIn"/>
-          <Logout v-else />
-          <UserMenu v-if="authStore.loggedIn" />
+        <div v-if="authStore.loggedIn" class="flex-none space-x-2">
+          <Logout />
+          <UserMenu />
+        </div>
+
+        <div v-else class="flex-none space-x-2">
+          <Login />
+          <Register />
         </div>
       </div>
 
