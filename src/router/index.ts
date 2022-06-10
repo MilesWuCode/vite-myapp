@@ -27,9 +27,9 @@ router.beforeEach(async (to, from, next) => {
 
   if (from.name === undefined) {
     await authState.then(user => {
-      console.log(user)
-
       if (user) {
+        console.log(user)
+
         authStore.setUser(user as object)
       }
     })

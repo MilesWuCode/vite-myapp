@@ -6,6 +6,10 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import GoogleSingin from '~/components/singin/GoogleSingin.vue'
 import FacebookSingin from '~/components/singin/FacebookSingin.vue'
 import { useAuthStore } from '~/stores/auth'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 useHead({
   title: 'Login',
@@ -42,13 +46,15 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
   // })
 
   signInWithEmailAndPassword(auth, values.email, values.password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       // Signed in
       const user = userCredential.user
       // ...
       console.log(userCredential, user)
       // store
       authStore.setUser(user)
+      // return previous page
+      router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
     })
     .catch((error) => {
       const errorCode = error.code

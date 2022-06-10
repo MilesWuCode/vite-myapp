@@ -16,5 +16,5 @@ useHead({
 <route lang="yaml">
 meta:
   layout: default
-  auth: everyone
+  auth: guest
 </route>
