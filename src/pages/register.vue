@@ -128,7 +128,7 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
             type="password"
             placeholder="Type here"
             class="w-full max-w-xs input input-bordered"
-            rules="required|min:8"
+            rules="required"
           />
           <label class="label">
             <ErrorMessage as="span" name="password" class="text-red-600 label-text-alt" />

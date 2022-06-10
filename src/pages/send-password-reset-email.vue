@@ -2,21 +2,12 @@
 import { useHead } from '@vueuse/head'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { auth } from '~/plugins/firebase/auth'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import GoogleSingin from '~/components/singin/GoogleSingin.vue'
-import FacebookSingin from '~/components/singin/FacebookSingin.vue'
-import { useAuthStore } from '~/stores/auth'
-import { useRoute, useRouter } from 'vue-router'
-
-const route = useRoute()
-const router = useRouter()
+import { sendPasswordResetEmail } from 'firebase/auth'
 
 useHead({
-  title: 'Login',
-  meta: [{ name: 'description', content: 'Login' }],
+  title: 'Send Password Reset Email',
+  meta: [{ name: 'description', content: 'Send Password Reset Email' }],
 })
-
-const authStore = useAuthStore()
 
 interface FormState {
   // any error messages
@@ -40,29 +31,13 @@ interface FormActions {
 }
 
 const onSubmit = (values: Record<string, any>, actions: FormActions) => {
-  // * demo
-  // new Promise((resolve) => {
-  //   setTimeout(() => resolve(console.log(values)), 3000)
-  // })
-
-  signInWithEmailAndPassword(auth, values.email, values.password)
-    .then(async (userCredential) => {
-      // Signed in
-      const user = userCredential.user
-      // ...
-      console.log(userCredential, user)
-      // store
-      authStore.setUser(user)
-      // return previous page
-      router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
-    })
+  sendPasswordResetEmail(auth, values.email)
+    .then(() => {})
     .catch((error) => {
       const errorCode = error.code
       const errorMessage = error.message
 
-      // auth/invalid-password-hash
       // auth/user-not-found
-      // auth/wrong-password
       console.log(errorCode)
 
       // Firebase: Error (auth/wrong-password).
@@ -76,7 +51,7 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
 <template>
   <div class="w-full max-w-sm p-4 mx-auto">
     <!-- title -->
-    <h1 class="text-xl">Login</h1>
+    <h1 class="text-xl">Send Password Reset Email</h1>
 
     <!-- form -->
     <Form novalidate @submit="onSubmit" v-slot="{ isSubmitting }">
@@ -99,24 +74,6 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
           </label>
         </div>
 
-        <div class="w-full max-w-xs form-control">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <Field
-            name="password"
-            as="input"
-            type="password"
-            placeholder="Type here"
-            class="w-full max-w-xs input input-bordered"
-            rules="required"
-            autocomplete="on"
-          />
-          <label class="label">
-            <ErrorMessage as="span" name="password" class="text-red-600 label-text-alt" />
-          </label>
-        </div>
-
         <div class="space-x-2">
           <button
             type="submit"
@@ -130,9 +87,6 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
         </div>
       </div>
     </Form>
-
-    <GoogleSingin />
-    <FacebookSingin />
   </div>
 </template>
 

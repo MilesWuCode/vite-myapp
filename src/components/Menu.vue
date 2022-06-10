@@ -6,7 +6,7 @@ const menu = reactive<Menu[]>([
   { name: "Index", path: "/" },
   { name: "Login", path: "/login" },
   { name: "Register", path: "/register" },
-  { name: "Fogot Password", path: "/forgot-password" },
+  { name: "Send Password Reset Email", path: "/send-password-reset-email" },
   { name: "Profile", path: "/profile" },
   { name: "Change Password", path: "/change-password" },
 ]);
