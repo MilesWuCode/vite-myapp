@@ -13,9 +13,9 @@ export const authState = new Promise((resolve) => {
 
       const data = await apiSingin(idToken)
 
-      authStore.setUser(data.user)
+      authStore.setUser(data)
 
-      resolve(data.user)
+      resolve(data)
     } else {
       authStore.setUser(null)
 
@@ -36,11 +36,11 @@ const apiSingin = async (idToken: string) => {
 
   await ax.get(`/sanctum/csrf-cookie`)
 
-  const data = ax.post(`/api/firebase/auth/singin`, {
+  const { data: { user, token } } = await ax.post(`/api/firebase/auth/singin`, {
     idToken
   })
 
-  return data
+  return user
 }
 
 export const useLogin = () => {
@@ -49,7 +49,7 @@ export const useLogin = () => {
   return async (idToken: string, user?: User) => {
     const data = await apiSingin(idToken)
 
-    authStore.setUser(data.user)
+    authStore.setUser(data)
   }
 }
 
