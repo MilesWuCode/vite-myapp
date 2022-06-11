@@ -26,13 +26,8 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
   if (from.name === undefined) {
-    await authState.then(user => {
-      if (user) {
-        console.log(user)
-
-        authStore.setUser(user as object)
-      }
-    })
+    console.log('router')
+    await authState
   }
 
   if (to.meta.auth === 'guest' && authStore.loggedIn) {

@@ -2,10 +2,10 @@
 import { useHead } from '@vueuse/head'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { auth } from '~/plugins/firebase/auth'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import GoogleSingin from '~/components/singin/GoogleSingin.vue'
 import FacebookSingin from '~/components/singin/FacebookSingin.vue'
-import { useAuthStore } from '~/stores/auth'
+import { useLogin } from '~/plugins/auth'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -16,7 +16,7 @@ useHead({
   meta: [{ name: 'description', content: 'Login' }],
 })
 
-const authStore = useAuthStore()
+const login = useLogin()
 
 interface FormState {
   // any error messages
@@ -46,15 +46,20 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
   // })
 
   signInWithEmailAndPassword(auth, values.email, values.password)
-    .then(async (userCredential) => {
+    .then(async (userCredential: UserCredential) => {
       // Signed in
       const user = userCredential.user
       // ...
-      console.log(userCredential, user)
-      // store
-      authStore.setUser(user)
-      // return previous page
-      router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
+      console.log(user)
+      // login
+      if (user) {
+        // token
+        const idToken = await user.getIdToken()
+        // login
+        // login(idToken, user)
+        // return previous page
+        router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
+      }
     })
     .catch((error) => {
       const errorCode = error.code
