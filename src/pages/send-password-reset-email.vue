@@ -31,7 +31,9 @@ interface FormActions {
 }
 
 const onSubmit = (values: Record<string, any>, actions: FormActions) => {
-  sendPasswordResetEmail(auth, values.email)
+  sendPasswordResetEmail(auth, values.email, {
+    url: `${import.meta.env.VITE_BASE_URL}/login`,
+  })
     .then(() => {})
     .catch((error) => {
       const errorCode = error.code
