@@ -5,33 +5,29 @@ import { useAuthStore } from '~/stores/auth'
 
 export const authState = new Promise((resolve) => {
   onAuthStateChanged(auth, async (user: User | null): Promise<void> => {
-    const authStore = useAuthStore()
-
     if (user) {
       const idToken = await user.getIdToken()
 
       const data = await apiSingin(idToken)
 
-      authStore.setUser(data)
-
       resolve(data)
     } else {
-      authStore.setUser(null)
-
       resolve(null)
     }
   })
 })
 
+const ax = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+  withCredentials: true,
+})
+
 const apiSingin = async (idToken: string) => {
-  const ax = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
-    withCredentials: true,
-  })
+  const authStore = useAuthStore()
 
   await ax.get(`/sanctum/csrf-cookie`)
 
@@ -39,5 +35,25 @@ const apiSingin = async (idToken: string) => {
     idToken
   })
 
+  authStore.setUser(user, token)
+
   return user
+}
+
+export const apiSingOut = async () => {
+  const authStore = useAuthStore()
+
+  if (!authStore.token) {
+    return
+  }
+
+  await ax.get(`/sanctum/csrf-cookie`)
+
+  await ax.post(`/api/auth/logout`, {}, {
+    headers: {
+      'Authorization': `Bearer ${authStore.token}`,
+    }
+  })
+
+  authStore.setUser(null, null)
 }
