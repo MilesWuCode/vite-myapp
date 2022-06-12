@@ -7,13 +7,10 @@ import {
   UserCredential,
   OAuthCredential,
 } from 'firebase/auth'
-import { useLogin } from '~/plugins/auth'
 import { useRoute, useRouter } from 'vue-router'
 
 const provider = new FacebookAuthProvider()
 provider.addScope('email')
-
-const login = useLogin()
 
 const route = useRoute()
 const router = useRouter()
@@ -21,25 +18,23 @@ const router = useRouter()
 // 彈窗登入
 const signInPopup = () => {
   signInWithPopup(auth, provider)
-    .then(async (result: UserCredential): Promise<void> => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential: OAuthCredential | null = FacebookAuthProvider.credentialFromResult(
-        result
-      )
-      // The signed-in user info.
-      const user = result.user as User
-      // ...
-      console.log(user, credential)
-      // login
-      if (user) {
-        // token
-        // const idToken = await user.getIdToken()
+    .then(
+      async (result: UserCredential): Promise<void> => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential: OAuthCredential | null = FacebookAuthProvider.credentialFromResult(
+          result
+        )
+        // The signed-in user info.
+        const user = result.user as User
+        // ...
+        console.log(user, credential)
         // login
-        // login(idToken, user)
-        // return previous page
-        router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
+        if (user) {
+          // return previous page
+          router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
+        }
       }
-    })
+    )
     .catch((error) => {
       // Handle Errors here.
       const errorCode = error.code

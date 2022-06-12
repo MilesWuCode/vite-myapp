@@ -14,6 +14,15 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     setUser(user: object|null) {
       this.user = user
+
+      // * tip
+      // if(user) {
+      //   router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
+      // }else{
+      //   if (router.currentRoute.value.meta.auth === 'member') {
+      //     router.push('/')
+      //   }
+      // }
     },
   },
 })

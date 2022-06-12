@@ -26,7 +26,6 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
   if (from.name === undefined) {
-    console.log('router')
     await authState
   }
 

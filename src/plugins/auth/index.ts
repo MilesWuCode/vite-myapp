@@ -1,8 +1,7 @@
+import axios from 'axios'
 import { auth } from '~/plugins/firebase/auth'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { useAuthStore } from '~/stores/auth'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
 
 export const authState = new Promise((resolve) => {
   onAuthStateChanged(auth, async (user: User | null): Promise<void> => {
@@ -41,27 +40,4 @@ const apiSingin = async (idToken: string) => {
   })
 
   return user
-}
-
-export const useLogin = () => {
-  const authStore = useAuthStore()
-
-  return async (idToken: string, user?: User) => {
-    const data = await apiSingin(idToken)
-
-    authStore.setUser(data)
-  }
-}
-
-export const useLogout = () => {
-  const authStore = useAuthStore()
-  const router = useRouter()
-
-  return () => {
-    authStore.setUser(null)
-
-    if (router.currentRoute.value.meta.auth === 'member') {
-      router.push('/')
-    }
-  }
 }

@@ -5,7 +5,6 @@ import { auth } from '~/plugins/firebase/auth'
 import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import GoogleSingin from '~/components/singin/GoogleSingin.vue'
 import FacebookSingin from '~/components/singin/FacebookSingin.vue'
-import { useLogin } from '~/plugins/auth'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -15,8 +14,6 @@ useHead({
   title: 'Login',
   meta: [{ name: 'description', content: 'Login' }],
 })
-
-const login = useLogin()
 
 interface FormState {
   // any error messages
@@ -53,10 +50,6 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
       console.log(user)
       // login
       if (user) {
-        // token
-        const idToken = await user.getIdToken()
-        // login
-        // login(idToken, user)
         // return previous page
         router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
       }
