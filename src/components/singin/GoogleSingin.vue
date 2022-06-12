@@ -7,13 +7,9 @@ import {
   UserCredential,
   OAuthCredential,
 } from 'firebase/auth'
-import { useRoute, useRouter } from 'vue-router'
 
 const provider = new GoogleAuthProvider()
 provider.addScope('https://www.googleapis.com/auth/userinfo.email')
-
-const route = useRoute()
-const router = useRouter()
 
 // 彈窗登入
 const signInPopup = () => {
@@ -28,11 +24,6 @@ const signInPopup = () => {
         const user = result.user as User
         // ...
         console.log(user, credential)
-        // login
-        if (user) {
-          // return previous page
-          router.push(route.redirectedFrom?.fullPath || window.history.state.back || '/')
-        }
       }
     )
     .catch((error) => {
