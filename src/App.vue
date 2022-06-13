@@ -4,7 +4,6 @@ import { auth } from '~/plugins/firebase/auth'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { useRoute, useRouter } from 'vue-router'
 import { apiSingOut } from '~/plugins/auth'
-import { resolveObjectURL } from 'buffer'
 
 const route = useRoute()
 const router = useRouter()
