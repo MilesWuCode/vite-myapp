@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia'
 
+interface User {
+  uid: string
+  name: string
+  email: string | null
+  image: string | null
+}
 interface AuthState {
-  user: object | null
+  user: User | null
   token?: string | null
 }
 

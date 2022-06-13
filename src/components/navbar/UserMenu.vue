@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { reactive } from "vue";
-import type { Menu as MenuType } from "~/types";
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { reactive } from 'vue'
+import type { Menu as MenuType } from '~/types'
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { useAuthStore } from '~/stores/auth'
 
 const menu = reactive<MenuType[]>([
-  { name: "Profile", path: "/profile" },
-  { name: "Change Password", path: "/change-password" },
-]);
+  { name: 'Profile', path: '/profile' },
+  { name: 'Change Password', path: '/change-password' },
+])
+
+const authStore = useAuthStore()
 </script>
 
 <template>
   <Menu as="div" class="dropdown dropdown-end">
-    <MenuButton class="btn btn-ghost btn-circle avatar">
-      <div class="w-10 rounded-full">
-        <img src="https://api.lorem.space/image/face?hash=33791" />
+    <MenuButton class="btn btn-ghost btn-circle avatar placeholder">
+      <div v-if="authStore.user?.image" class="w-10 rounded-full">
+        <img :src="authStore.user?.image" />
+      </div>
+      <div v-else class="w-10 bg-green-500 rounded-full">
+        <span class="text-lg text-white">?</span>
       </div>
     </MenuButton>
     <MenuItems

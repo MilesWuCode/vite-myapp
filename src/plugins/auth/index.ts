@@ -36,12 +36,25 @@ const apiSingIn = async (user: User) => {
       idToken
     })
 
-    authStore.setUser(data.user, data.token)
+    authStore.setUser({
+      uid: data.user.uid,
+      name: data.user.name,
+      email: data.user.email,
+      image: data.user.avatar,
+    }, data.token)
 
     return data.user
   } else {
-    // user.providerData[0]:UserInfo
-    authStore.setUser(user)
+    // * user.providerData[0]:UserInfo
+    console.log(user)
+
+    authStore.setUser({
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+      image: user.photoURL,
+    })
+
     return user
   }
 
