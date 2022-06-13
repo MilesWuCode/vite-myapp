@@ -6,9 +6,7 @@ import { useAuthStore } from '~/stores/auth'
 export const authState = new Promise((resolve) => {
   onAuthStateChanged(auth, async (user: User | null): Promise<void> => {
     if (user) {
-      const idToken = await user.getIdToken()
-
-      const data = await apiSingin(idToken)
+      const data = await apiSingIn(user)
 
       resolve(data)
     } else {
@@ -26,34 +24,45 @@ const ax = axios.create({
   withCredentials: true,
 })
 
-const apiSingin = async (idToken: string) => {
+const apiSingIn = async (user: User) => {
   const authStore = useAuthStore()
 
-  await ax.get(`/sanctum/csrf-cookie`)
+  if (import.meta.env.VITE_API_URL) {
+    const idToken = await user.getIdToken()
 
-  const { data: { user, token } } = await ax.post(`/api/firebase/auth/singin`, {
-    idToken
-  })
+    await ax.get(`/sanctum/csrf-cookie`)
 
-  authStore.setUser(user, token)
+    const { data } = await ax.post(`/api/firebase/auth/singin`, {
+      idToken
+    })
 
-  return user
+    authStore.setUser(data.user, data.token)
+
+    return data.user
+  } else {
+    authStore.setUser(user)
+    return user
+  }
+
+
 }
 
 export const apiSingOut = async () => {
   const authStore = useAuthStore()
 
-  if (!authStore.token) {
-    return
-  }
-
-  await ax.get(`/sanctum/csrf-cookie`)
-
-  await ax.post(`/api/auth/logout`, {}, {
-    headers: {
-      'Authorization': `Bearer ${authStore.token}`,
-    }
-  })
-
   authStore.setUser(null, null)
+
+  if (import.meta.env.VITE_API_URL) {
+    if (!authStore.token) {
+      return
+    }
+
+    await ax.get(`/sanctum/csrf-cookie`)
+
+    await ax.post(`/api/auth/logout`, {}, {
+      headers: {
+        'Authorization': `Bearer ${authStore.token}`,
+      }
+    })
+  }
 }
