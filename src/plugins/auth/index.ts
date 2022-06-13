@@ -40,6 +40,7 @@ const apiSingIn = async (user: User) => {
 
     return data.user
   } else {
+    // user.providerData[0]:UserInfo
     authStore.setUser(user)
     return user
   }
