@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 interface User {
   uid: string
-  name: string
+  name: string | null
   email: string | null
   image: string | null
 }
@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', {
     loggedIn: (state): boolean => state.user !== null,
   },
   actions: {
-    setUser(user: object | null, token?: string | null) {
+    setUser(user: User | null, token?: string | null) {
       this.user = user
       this.token = token
     },

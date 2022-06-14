@@ -3,6 +3,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import { authState } from '~/plugins/auth'
 import { useAuthStore } from '~/stores/auth'
+import NProgress from 'nprogress'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,6 +26,10 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
+  if (to.path !== from.path){
+    NProgress.start()
+  }
+
   if (from.name === undefined) {
     console.log('router')
     await authState
@@ -38,5 +43,7 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
+
+router.afterEach(() => { NProgress.done() })
 
 export default router

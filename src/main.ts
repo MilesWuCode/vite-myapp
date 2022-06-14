@@ -1,4 +1,8 @@
 import './main.css'
+
+// nprogress
+import 'nprogress/nprogress.css'
+
 import { createApp } from 'vue'
 
 // head

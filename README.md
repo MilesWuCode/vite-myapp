@@ -20,3 +20,4 @@ yarn dev
 - https://github.com/jpkleemans/vite-svg-loader
 - https://github.com/ashwinkshenoy/vue-simple
 - https://github.com/nhn/tui.editor
+- https://github.com/rstacruz/nprogress
