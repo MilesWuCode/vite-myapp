@@ -31,21 +31,25 @@ const apiSingIn = async (user: User) => {
   if (import.meta.env.VITE_API_URL) {
     const idToken = await user.getIdToken()
 
-    // domain:same,csrf:on
-    await ax.get(`/sanctum/csrf-cookie`)
+    try {
+      // domain:same,csrf:on
+      await ax.get(`/sanctum/csrf-cookie`)
 
-    const { data } = await ax.post(`/api/firebase/auth/singin`, {
-      idToken
-    })
+      const { data } = await ax.post(`/api/firebase/auth/singin`, {
+        idToken
+      })
 
-    authStore.setUser({
-      uid: data.user.uid,
-      name: data.user.name,
-      email: data.user.email,
-      image: data.user.avatar,
-    }, data.token)
+      authStore.setUser({
+        uid: data.user.uid,
+        name: data.user.name,
+        email: data.user.email,
+        image: data.user.avatar,
+      }, data.token)
 
-    return data.user
+      return data.user
+    } catch (err) {
+      return null
+    }
   } else {
     // * user.providerData[0]:UserInfo
     console.log(user)
