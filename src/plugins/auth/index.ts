@@ -1,7 +1,7 @@
-import axios from 'axios'
 import { auth } from '~/plugins/firebase/auth'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { useAuthStore } from '~/stores/auth'
+import axios from '~/plugins/axios'
 
 export const authState = new Promise((resolve) => {
   onAuthStateChanged(auth, async (user: User | null): Promise<void> => {
@@ -15,16 +15,6 @@ export const authState = new Promise((resolve) => {
   })
 })
 
-const ax = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-  // domain:same,csrf:on
-  withCredentials: true,
-})
-
 const apiSingIn = async (user: User) => {
   const authStore = useAuthStore()
 
@@ -33,9 +23,9 @@ const apiSingIn = async (user: User) => {
 
     try {
       // domain:same,csrf:on
-      await ax.get(`/sanctum/csrf-cookie`)
+      await axios.get(`/sanctum/csrf-cookie`)
 
-      const { data } = await ax.post(`/api/firebase/auth/singin`, {
+      const { data } = await axios.post(`/api/firebase/auth/singin`, {
         idToken
       })
 
@@ -63,8 +53,6 @@ const apiSingIn = async (user: User) => {
 
     return user
   }
-
-
 }
 
 export const apiSingOut = async () => {
@@ -77,9 +65,9 @@ export const apiSingOut = async () => {
       return
     }
 
-    await ax.get(`/sanctum/csrf-cookie`)
+    await axios.get(`/sanctum/csrf-cookie`)
 
-    await ax.post(`/api/auth/logout`, {}, {
+    await axios.post(`/api/auth/logout`, {}, {
       headers: {
         'Authorization': `Bearer ${authStore.token}`,
       }

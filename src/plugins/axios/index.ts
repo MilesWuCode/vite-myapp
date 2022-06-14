@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { useAuthStore } from '~/stores/auth'
+
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
@@ -7,7 +8,7 @@ const instance = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
   // domain:same,csrf:on
-  // withCredentials: true,
+  withCredentials: true,
 })
 
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
