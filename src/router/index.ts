@@ -26,7 +26,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
-  if (to.path !== from.path){
+  if (to.path !== from.path) {
     NProgress.start()
   }
 
