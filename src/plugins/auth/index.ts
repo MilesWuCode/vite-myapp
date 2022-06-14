@@ -21,6 +21,7 @@ const ax = axios.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
+  // domain:same,csrf:on
   withCredentials: true,
 })
 
@@ -30,6 +31,7 @@ const apiSingIn = async (user: User) => {
   if (import.meta.env.VITE_API_URL) {
     const idToken = await user.getIdToken()
 
+    // domain:same,csrf:on
     await ax.get(`/sanctum/csrf-cookie`)
 
     const { data } = await ax.post(`/api/firebase/auth/singin`, {

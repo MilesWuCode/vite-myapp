@@ -17,7 +17,7 @@ onAuthStateChanged(
   auth,
   async (user: User | null): Promise<void> => {
     if (user) {
-      // 若在登入頁，回上一頁
+      // 若在登入頁,回上一頁
       if (route.name === 'login') {
         // 上一頁
         const resolve = router.resolve(
@@ -30,7 +30,7 @@ onAuthStateChanged(
         return
       }
 
-      // 若在訪客頁，登入後去首頁
+      // 若在訪客頁,登入後去首頁
       if (router.currentRoute.value.meta.auth === 'guest') {
         router.push('/')
 
@@ -39,7 +39,7 @@ onAuthStateChanged(
     } else {
       await apiSingOut()
 
-      // 登出後，若是會員頁，回首頁
+      // 登出後,若是會員頁,回首頁
       if (router.currentRoute.value.meta.auth === 'member') {
         router.push('/')
 
