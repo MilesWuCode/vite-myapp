@@ -52,7 +52,7 @@ const onSubmit = (values: Record<string, any>, actions: FormActions) => {
       const errorCode = error.code
       const errorMessage = error.message
 
-      //
+      // auth/requires-recent-login
       console.log(errorCode, errorMessage)
 
       actions.setErrors({ password: errorCode })
