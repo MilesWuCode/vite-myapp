@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           source: "./"
-          target: "/home/miles/abc"
+          target: "~/def"
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
