@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Deploy with rsync
-        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" . ${{ secrets.USERNAME }}@${{ secrets.HOST }}: ~/abc
+        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}: ~/abc
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
