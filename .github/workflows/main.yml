@@ -10,8 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Deploy with rsync
-        run: rsync -avz -e "ssh -p ${{ secrets.PORT }}" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}: ~/abc
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "./"
+          target: "/home/miles/abc"
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
