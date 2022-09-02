@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           source: "./"
-          target: "~/def"
+          target: "~/project"
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -27,4 +27,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          script: whoami >> c.txt
+          script: |
+            whoami >> d.txt
+            ls -la >> d.txt
