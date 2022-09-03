@@ -1,32 +1,35 @@
-name: Remote ssh command
+name: 簡易部署
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: copy file via ssh password
+      - name: 源碼移至主機
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
+          port: ${{ secrets.SSH_PORT }}
           source: "./"
-          target: "~/project"
+          target: "~/vite-myapp"
 
-      - name: executing remote ssh commands using password
+      - name: 執行編譯
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            whoami >> d.txt
-            ls -la >> d.txt
+            cd ~/vite-myapp
+            yarn install
+            yanr build
+
