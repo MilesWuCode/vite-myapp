@@ -30,6 +30,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ~/vite-myapp
-            yarn install
-            yanr build
+            npm install
+            npm run build
 
