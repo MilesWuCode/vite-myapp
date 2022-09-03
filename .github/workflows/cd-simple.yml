@@ -1,15 +1,53 @@
 name: 簡易部署
 
 on:
+  # PUSH分支時
+  push:
+    branches: [ "master" ]
+
+  # PR分支時
+  pull_request:
+    branches: [ "master" ]
+
+  # 時間排程
+  schedule:
+    - cron: '0 0 * * *' # 24:00
+
+  # 提供手動
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build
+    # github限定主機:windows,ubuntu,macos
     runs-on: ubuntu-latest
 
     steps:
+      # checkout分支
       - uses: actions/checkout@v3
+
+      # node, npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: echo VITE_BASE_URL=http://localhost:3000 .env
+      - run: echo VITE_API_URL= .env
+      - run: echo VITE_FIREBASE_API_KEY= .env
+      - run: echo VITE_FIREBASE_AUTH_DOMAIN= .env
+      - run: echo VITE_FIREBASE_PROJECT_ID= .env
+      - run: echo VITE_FIREBASE_STORAGE_BUCKET= .env
+      - run: echo VITE_FIREBASE_MESSAGEING_SENDER_ID= .env
+      - run: echo VITE_FIREBASE_APP_ID= .env
+      - run: npm ci
+      - run: npm run build
+
+      - name: 刪除舊版
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: rm -rf "~/vite-myapp"
 
       - name: 源碼移至主機
         uses: appleboy/scp-action@master
@@ -18,18 +56,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./"
+          source: "./dist"
           target: "~/vite-myapp"
-
-      - name: 執行編譯
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/vite-myapp
-            npm install
-            npm run build
 
