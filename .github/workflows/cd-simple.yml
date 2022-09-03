@@ -40,15 +40,6 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: 刪除舊版
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: rm -rf "~/vite-myapp"
-
       - name: 源碼移至主機
         uses: appleboy/scp-action@master
         with:
@@ -59,4 +50,5 @@ jobs:
           source: "./dist/*"
           target: "~/vite-myapp"
           strip_components: 1
+          rm: true
 
