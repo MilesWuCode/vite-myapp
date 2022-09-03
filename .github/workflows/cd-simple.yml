@@ -2,16 +2,16 @@ name: 簡易部署
 
 on:
   # PUSH分支時
-  push:
-    branches: [ "master" ]
+  # push:
+  #   branches: [ "master" ]
 
-  # PR分支時
-  pull_request:
-    branches: [ "master" ]
+  # # PR分支時
+  # pull_request:
+  #   branches: [ "master" ]
 
   # 時間排程
-  schedule:
-    - cron: '0 0 * * *' # 24:00
+  # schedule:
+  #   - cron: '0 0 * * *' # 24:00
 
   # 提供手動
   workflow_dispatch:
