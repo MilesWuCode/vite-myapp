@@ -1,4 +1,4 @@
-name: 簡易部署
+name: 簡易部署Runner
 
 on:
   # PUSH分支時
@@ -19,7 +19,7 @@ on:
 jobs:
   build:
     # github限定主機:windows,ubuntu,macos,self-hosted
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       # checkout分支
